@@ -13,7 +13,7 @@ func PaymentHandler(w http.ResponseWriter, r *http.Request) {
 	id := r.URL.Query().Get("id")
 	amount := r.URL.Query().Get("amount")
 
-	result, err := db_storage.BalancePayment(DB, id, amount)
+	result, err := db_storage.BalanceChange(DB, id, amount)
 	if err != nil {
 		log.Println("Error happened handling Balance Payment:", err)
 		w.WriteHeader(http.StatusConflict)
@@ -42,7 +42,7 @@ func WithdrawHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	result, err := db_storage.BalancePayment(DB, id, "-" + amount)
+	result, err := db_storage.BalanceChange(DB, id, "-" + amount)
 	if err != nil {
 		log.Println("Error happened handling Balance Payment:", err)
 		w.WriteHeader(http.StatusConflict)
@@ -75,7 +75,7 @@ func TransferHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	senderBalanceDecrease, err := db_storage.BalancePayment(DB, fromId, "-" + amount)
+	senderBalanceDecrease, err := db_storage.BalanceChange(DB, fromId, "-" + amount)
 	if err != nil {
 		log.Println("Error happened handling Transfer:", err)
 		w.WriteHeader(http.StatusConflict)
@@ -84,7 +84,7 @@ func TransferHandler(w http.ResponseWriter, r *http.Request) {
 	senderRowsAffected, _ := senderBalanceDecrease.RowsAffected()
 	senderLastInsertId , _ := senderBalanceDecrease.LastInsertId()
 
-	receiverBalanceIncrease, err := db_storage.BalancePayment(DB, toId, amount)
+	receiverBalanceIncrease, err := db_storage.BalanceChange(DB, toId, amount)
 	if err != nil {
 		log.Println("Error happened handling Transfer:", err)
 		w.WriteHeader(http.StatusConflict)
@@ -112,7 +112,12 @@ func BalanceHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response := fmt.Sprintf("Request contains id: %s | currency: %s\nBalance in RUB: %f", id, currency, balance)
+	var response string
+	if currency != "" {
+		response = fmt.Sprintf("Request contains id: %s | currency: %s\nBalance in %s: %f", id, currency, currency, balance)
+	}
+	response = fmt.Sprintf("Request contains id: %s \nBalance in RUB: %f", id, balance)
+
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprint(w, response)
 }

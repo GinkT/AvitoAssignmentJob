@@ -8,7 +8,6 @@ import (
 
 var db *sql.DB
 
-
 // Подключение к БД
 func NewDatabase(dbHost string, dbPort int, dbUser string, dbPassword string, dbBase string) (*sql.DB, error) {
 	if db != nil {

@@ -12,8 +12,9 @@ import (
 )
 
 /* Пополнение баланса. В случае если юзера не было в таблице - создаётся новая запись.
-   Если юзер был - выполняет UPDATE баланса и прибавляет сумму пополнения. */
-func BalancePayment(db *sql.DB, id, amount string) (sql.Result, error) {
+   Если юзер был - выполняет UPDATE баланса и прибавляет сумму пополнения.
+   Соответственно, если в начале amount стоит минус - убавляет. */
+func BalanceChange(db *sql.DB, id, amount string) (sql.Result, error) {
 	sqlStatement := `
 			INSERT INTO public."users"
 			VALUES($1, $2)
@@ -49,7 +50,7 @@ func GetBalance(db *sql.DB, id, currency string) (float64, error){
 		return 0, err
 	}
 
-	return balance * conversionRate, nil
+	return balance / conversionRate, nil
 }
 
 // Использует API валютного сайта для того чтобы получить коэффициент обмена РУБЛЯ на указанную валюту

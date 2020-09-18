@@ -10,12 +10,14 @@ var DB *sql.DB
 
 var rout *mux.Router
 
+// Создание роутера и маунт ссылок
 func NewRouter(db *sql.DB) *mux.Router {
 	if rout != nil {
 		return rout
 	}
 
 	DB = db
+
 	router := mux.NewRouter()
 	router.HandleFunc("/payment", PaymentHandler)
 	router.HandleFunc("/withdraw", WithdrawHandler)

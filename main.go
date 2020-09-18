@@ -15,7 +15,6 @@ const (
 	dbBase = "UserBilling"
 )
 
-
 func main () {
 	db, err := db_storage.NewDatabase(dbHost, dbPort, dbUser, dbPassword, dbBase)
 	if err != nil {
