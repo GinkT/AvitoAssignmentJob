@@ -11,10 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b320c27-2fed-456a-9a84-17238b54eb2d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dbStorage/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/dbStorage/init.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dbStorage/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/dbStorage/db.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -147,22 +145,22 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1060" y="454" key="FileChooserDialogImpl/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600422971967" />
-    <state width="1258" height="401" key="GridCell.Tab.0.bottom" timestamp="1600435466822">
+    <state width="1258" height="401" key="GridCell.Tab.0.bottom" timestamp="1600439847384">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="401" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600435466822" />
-    <state width="1258" height="401" key="GridCell.Tab.0.center" timestamp="1600435466822">
+    <state width="1258" height="401" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600439847384" />
+    <state width="1258" height="401" key="GridCell.Tab.0.center" timestamp="1600439847384">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="401" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600435466822" />
-    <state width="1258" height="401" key="GridCell.Tab.0.left" timestamp="1600435466822">
+    <state width="1258" height="401" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600439847384" />
+    <state width="1258" height="401" key="GridCell.Tab.0.left" timestamp="1600439847383">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="401" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600435466822" />
-    <state width="1258" height="401" key="GridCell.Tab.0.right" timestamp="1600435466822">
+    <state width="1258" height="401" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600439847383" />
+    <state width="1258" height="401" key="GridCell.Tab.0.right" timestamp="1600439847384">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="401" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600435466822" />
+    <state width="1258" height="401" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600439847384" />
     <state width="1258" height="359" key="GridCell.Tab.1.bottom" timestamp="1600422673320">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -193,7 +191,7 @@
       <breakpoints>
         <line-breakpoint type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/main.go</url>
-          <line>34</line>
+          <line>35</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

@@ -1,4 +1,4 @@
-package dbStorage
+package db_storage
 
 import (
 	"database/sql"
