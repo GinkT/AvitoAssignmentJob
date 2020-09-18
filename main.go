@@ -46,7 +46,7 @@ func main () {
 	router.HandleFunc("/balance", BalanceHandler)
 	http.Handle("/",router)
 
-	fmt.Println("Server is listening...")
+	fmt.Println("Server is listening... HEEE YA YEE ")
 	http.ListenAndServe(":8181", nil)
 
 }
@@ -58,14 +58,13 @@ func PaymentHandler(w http.ResponseWriter, r *http.Request) {
 
 	result, err := dbStorage.BalancePayment(Server.db, id, amount)
 	if err != nil {
-		log.Println("Error happened hadling Balance Payment:", err)
+		log.Println("Error happened handling Balance Payment:", err)
 		w.WriteHeader(http.StatusConflict)
 		return
 	}
 	rowsAffected, _ := result.RowsAffected()
 	lastInsertId , _ := result.LastInsertId()
 	response := fmt.Sprintf("Request contains id: %s | amount: %s\n[DB LOG] Rows affected: %d, Last Insert ID: %d", id, amount, rowsAffected, lastInsertId)
-
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprint(w, response)
 }
@@ -87,7 +86,16 @@ func TransferHandler(w http.ResponseWriter, r *http.Request) {
 func BalanceHandler(w http.ResponseWriter, r *http.Request) {
 	id := r.URL.Query().Get("id")
 	currency := r.URL.Query().Get("currency")
-	response := fmt.Sprintf("Request contains id: %s | currency: %s", id, currency)
+
+	balance, err := dbStorage.GetBalance(Server.db, id, currency)
+	if err != nil {
+		log.Println("Error handling Balance!", err)
+		w.WriteHeader(http.StatusConflict)
+		return
+	}
+
+	response := fmt.Sprintf("Request contains id: %s | currency: %s\nBalance in RUB: %f", id, currency, balance)
+	w.WriteHeader(http.StatusOK)
 	fmt.Fprint(w, response)
 }
 

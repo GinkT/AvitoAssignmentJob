@@ -1,6 +1,17 @@
 version: "3"
 
 services:
+  billingserver:
+    build: .
+    ports:
+    - "8181:8181"
+    depends_on:
+      - db
+    links:
+      - "db"
+    networks:
+      - fullstack
+
   db:
     image: postgres
     environment:
