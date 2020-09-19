@@ -13,25 +13,30 @@ func PaymentHandler(w http.ResponseWriter, r *http.Request) {
 	id := r.URL.Query().Get("id")
 	amount := r.URL.Query().Get("amount")
 
+	log.Printf("[HTTP] Got a payment request, contains: id: %s | amount: %s\n", id, amount)
+
 	result, err := db_storage.BalanceChange(DB, id, amount)
 	if err != nil {
-		log.Println("Error happened handling Balance Payment:", err)
+		log.Println("Error handling Payment!", err)
+		fmt.Fprint(w, "Error handling Payment!", err)
 		w.WriteHeader(http.StatusConflict)
 		return
 	}
 	rowsAffected, _ := result.RowsAffected()
-	lastInsertId , _ := result.LastInsertId()
-	response := fmt.Sprintf("Request contains id: %s | amount: %s\n[DB LOG] Rows affected: %d, Last Insert ID: %d", id, amount, rowsAffected, lastInsertId)
+	log.Printf("[DB] Payment handled. Rows Affected: %d\n", rowsAffected)
 
 	db_storage.AddTransaction(DB, "payment", "", id, amount)
 
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprint(w, response)
+	BalanceChangeResponseInJson(w, id, amount)
 }
 
 func WithdrawHandler(w http.ResponseWriter, r *http.Request) {
 	id := r.URL.Query().Get("id")
 	amount := r.URL.Query().Get("amount")
+
+	log.Printf("[HTTP] Got a withdraw request, contains: id: %s | amount: %s\n", id, amount)
 
 	if result, err := haveEnoughMoney(DB, id, amount); !result {
 		if err != nil {
@@ -39,9 +44,8 @@ func WithdrawHandler(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusConflict)
 			return
 		}
-		response := fmt.Sprintf("Request contains fromId: %s | amount: %s\nNot enough money!", id, amount)
+		fmt.Fprint(w, "Error handling Withdraw! Not enough money!")
 		w.WriteHeader(http.StatusConflict)
-		fmt.Fprint(w, response)
 		return
 	}
 
@@ -52,15 +56,13 @@ func WithdrawHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	rowsAffected, _ := result.RowsAffected()
-	lastInsertId , _ := result.LastInsertId()
-
-	response := fmt.Sprintf("Request contains id: %s | amount: %s\n[DB LOG] Rows affected: %d, Last Insert ID: %d",
-		id, amount, rowsAffected, lastInsertId)
+	log.Printf("[DB] Payment handled. Rows Affected: %d\n", rowsAffected)
 
 	db_storage.AddTransaction(DB, "withdraw", id, "", amount)
 
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprint(w, response)
+	BalanceChangeResponseInJson(w, id, "-" + amount)
 }
 
 func TransferHandler(w http.ResponseWriter, r *http.Request) {
@@ -68,15 +70,16 @@ func TransferHandler(w http.ResponseWriter, r *http.Request) {
 	toId := r.URL.Query().Get("toId")
 	amount := r.URL.Query().Get("amount")
 
+	log.Printf("[HTTP] Got a transfer request, contains: fromId: %s | toId: %s | amount: %s\n", fromId, toId, amount)
+
 	if result, err := haveEnoughMoney(DB, fromId, amount); !result {
 		if err != nil {
 			log.Println("Error checking money availible in Transfer handler:", err)
 			w.WriteHeader(http.StatusConflict)
 			return
 		}
-		response := fmt.Sprintf("Request contains fromId: %s | toId: %s | amount: %s\nNot enough money!", fromId, toId, amount)
+		fmt.Fprint(w, "Error handling Withdraw! Not enough money!")
 		w.WriteHeader(http.StatusConflict)
-		fmt.Fprint(w, response)
 		return
 	}
 
@@ -87,7 +90,6 @@ func TransferHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	senderRowsAffected, _ := senderBalanceDecrease.RowsAffected()
-	senderLastInsertId , _ := senderBalanceDecrease.LastInsertId()
 
 	receiverBalanceIncrease, err := db_storage.BalanceChange(DB, toId, amount)
 	if err != nil {
@@ -96,39 +98,46 @@ func TransferHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	receiverRowsAffected, _ := receiverBalanceIncrease.RowsAffected()
-	receiverLastInsertId , _ := receiverBalanceIncrease.LastInsertId()
 
-	response := fmt.Sprintf("Request contains fromId: %s | toId: %s | amount: %s" +
-		"\n[DB LOG] Sender Rows affected: %d, Sender Last Insert ID: %d" +
-		"\nReceiver Rows affected: %d, Receiver Last Insert ID: %d",
-		fromId, toId, amount, senderRowsAffected, senderLastInsertId, receiverRowsAffected, receiverLastInsertId)
+	log.Printf("[DB LOG] Sender Rows affected: %d | Receiver Rows affected: %d\n",
+		senderRowsAffected, receiverRowsAffected)
 
 	db_storage.AddTransaction(DB, "transfer", fromId, toId, amount)
 
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprint(w, response)
+	TransferResponseInJson(w, fromId, toId, amount)
 }
 
 func BalanceHandler(w http.ResponseWriter, r *http.Request) {
 	id := r.URL.Query().Get("id")
 	currency := r.URL.Query().Get("currency")
 
+	log.Printf("[HTTP] Got a balance request, contains: id: %s | currencyu: %s\n", id, currency)
+
 	balance, err := db_storage.GetBalance(DB, id, currency)
 	if err != nil {
 		log.Println("Error handling Balance!", err)
+		fmt.Fprint(w, "Error handling Balance!", err)
 		w.WriteHeader(http.StatusConflict)
 		return
 	}
 
-	var response string
-	if currency != "" {
-		response = fmt.Sprintf("Request contains id: %s | currency: %s\nBalance in %s: %f", id, currency, currency, balance)
-	} else {
-		response = fmt.Sprintf("Request contains id: %s \nBalance in RUB: %f", id, balance)
-	}
-
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprint(w, response)
+	BalanceResponseInJson(w, id, balance, currency)
+}
+
+func HistoryHandler(w http.ResponseWriter, r *http.Request) {
+	id := r.URL.Query().Get("id")
+	sortBy := r.URL.Query().Get("sortBy")
+	orderBy := r.URL.Query().Get("orderBy")
+
+	log.Printf("[HTTP] Got a history request, contains: id: %s | sortBy: %s | orderBy: %s\n", id, sortBy, orderBy)
+
+	transactions := db_storage.GetHistoryForId(DB, id, sortBy, orderBy)
+	w.WriteHeader(http.StatusOK)
+	HistoryResponseInJson(w, transactions)
 }
 
 func haveEnoughMoney(db *sql.DB, id, amount string) (bool, error){

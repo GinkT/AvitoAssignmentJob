@@ -23,6 +23,7 @@ func NewRouter(db *sql.DB) *mux.Router {
 	router.HandleFunc("/withdraw", WithdrawHandler)
 	router.HandleFunc("/transfer", TransferHandler)
 	router.HandleFunc("/balance", BalanceHandler)
+	router.HandleFunc("/history", HistoryHandler)
 	http.Handle("/",router)
 	return router
 }

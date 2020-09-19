@@ -7,7 +7,6 @@ import (
 	_ "github.com/lib/pq"
 	"io/ioutil"
 	"net/http"
-	"strconv"
 	"time"
 
 	"log"
@@ -79,26 +78,20 @@ func GetConversionRate(currency string) (float64, error) {
 	var result map[string]interface{}
 	json.Unmarshal(body, &result)
 	rate := result["rates"].(map[string]interface{})
-	log.Printf("Unmarshalled current rate for %s: %f\n", currency, rate["RUB"])
+	log.Printf("[Rate API] Unmarshalled current rate for %s: %f\n", currency, rate["RUB"])
 
 	return rate["RUB"].(float64), nil
 }
 
-func nullIntCheck(s string) sql.NullInt64 {
-	if len(s) == 0 {
-		return sql.NullInt64{}
-	}
-	sInt, _ := strconv.ParseInt(s, 10, 64)
-	return sql.NullInt64{ Int64: sInt, Valid: true}
-}
-
-func nullIntCheck_I(str string) interface{} {
+// Проверка на Null, возвращает NullInt или пустой интерфейс
+func nullIntCheck(str string) interface{} {
 	if len(str) == 0 {
 		return sql.NullInt64{}
 	}
 	return str
 }
 
+// Добавляет транзакцию в Таблицу транзакций. Имеет проверку значений sender, receiver на NULL
 func AddTransaction(db *sql.DB, transactionType, sender, receiver, amount string) error {
 	sqlStatement := `
 			INSERT INTO public."transactions" (type, sender, receiver, amount, time)
@@ -107,9 +100,64 @@ func AddTransaction(db *sql.DB, transactionType, sender, receiver, amount string
 
 	time := time.Now().Unix()
 
-	_, err := db.Exec(sqlStatement, transactionType, nullIntCheck_I(sender), nullIntCheck_I(receiver), amount, time)
+	_, err := db.Exec(sqlStatement, transactionType, nullIntCheck(sender), nullIntCheck(receiver), amount, time)
 	if err != nil {
 		return err
 	}
 	return nil
 }
+
+/*
+	CREATE TABLE transactions (
+    id          SERIAL              PRIMARY KEY,
+    type        text                NOT NULL,
+    sender      integer             NULL,
+    receiver    integer             NULL,
+    amount      double precision    NOT NULL,
+    time        integer             NOT NULL
+);
+ */
+
+type Transaction struct {
+	Desc 		string				`json:"description"`
+	Sender 		sql.NullInt64		`json:"sender"`
+	Receiver 	sql.NullInt64		`json:"receiver"`
+	Amount 		string				`json:"amount"`
+	Time 		string				`json:"time"`
+}
+
+func GetHistoryForId(db *sql.DB, id, sortBy, orderBy string) []*Transaction {
+	sqlStatement := `
+			SELECT type, sender, receiver, amount, time 
+			FROM public."transactions" 
+			WHERE sender = $1 OR receiver = $1 
+		`
+	if sortBy == "amount" || sortBy == "time" {
+		sqlStatement += ` ORDER BY ` + sortBy
+		if orderBy == "asc" || orderBy == "desc" {
+			sqlStatement += ` ` + orderBy
+		}
+	}
+
+	rows, err := db.Query(sqlStatement, id)
+	if err != nil {
+		log.Println(err)
+	}
+	defer rows.Close()
+
+	transactions := make([]*Transaction, 0)
+	for rows.Next() {
+		trans := new(Transaction)
+		err := rows.Scan(&trans.Desc, &trans.Sender, &trans.Receiver, &trans.Amount, &trans.Time)
+		if err != nil {
+			log.Println("Error doing scan in Get History", err)
+			return nil
+		}
+		transactions = append(transactions, trans)
+	}
+	if err = rows.Err(); err != nil {
+		log.Println(err)
+	}
+	return transactions
+}
+
