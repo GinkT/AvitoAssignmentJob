@@ -11,11 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b320c27-2fed-456a-9a84-17238b54eb2d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/http_api/json_encoders.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_storage/functions.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_storage/functions.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/http_api/handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/http_api/handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/http_api/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/http_api/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/http_api/json_encoders.go" beforeDir="false" afterPath="$PROJECT_DIR$/http_api/json_encoders.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,9 +47,9 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="postgresql" />
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
@@ -139,18 +139,22 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1072" y="533" key="#Go_Modules/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600412653934" />
+    <state x="906" y="378" key="#Inspections" timestamp="1600528931406">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="906" y="378" key="#Inspections/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600528931406" />
     <state x="1031" y="523" key="#Notifications" timestamp="1600502152641">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1031" y="523" key="#Notifications/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600502152641" />
-    <state x="720" y="555" key="#SQL_Resolution_Scopes" timestamp="1600452854635">
+    <state x="720" y="555" key="#SQL_Resolution_Scopes" timestamp="1600528957007">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="720" y="555" key="#SQL_Resolution_Scopes/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600452854635" />
-    <state x="734" y="354" width="1092" height="716" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1600414948756">
+    <state x="720" y="555" key="#SQL_Resolution_Scopes/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600528957007" />
+    <state x="734" y="354" width="1092" height="716" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1600529069444">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="734" y="354" width="1092" height="716" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600414948756" />
+    <state x="734" y="354" width="1092" height="716" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600529069444" />
     <state x="1049" y="501" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1600449686209">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -195,6 +199,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1258" height="359" key="GridCell.Tab.1.right/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600422673320" />
+    <state width="200" height="441" key="SqlResolveConfigurable" timestamp="1600528942769">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="200" height="441" key="SqlResolveConfigurable/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600528942769" />
     <state x="832" y="429" width="896" height="528" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1600415440234">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>

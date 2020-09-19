@@ -18,7 +18,7 @@ func PaymentHandler(w http.ResponseWriter, r *http.Request) {
 	result, err := db_storage.BalanceChange(DB, id, amount)
 	if err != nil {
 		log.Println("Error handling Payment!", err)
-		fmt.Fprint(w, "Error handling Payment!", err)
+		ErrorResponseInJson(w, 409, "Error handling Payment!")
 		w.WriteHeader(http.StatusConflict)
 		return
 	}
@@ -41,17 +41,20 @@ func WithdrawHandler(w http.ResponseWriter, r *http.Request) {
 	if result, err := haveEnoughMoney(DB, id, amount); !result {
 		if err != nil {
 			log.Println("Error checking money availible in Transfer handler:", err)
+			ErrorResponseInJson(w, 409, "Invalid ID")
 			w.WriteHeader(http.StatusConflict)
 			return
 		}
-		fmt.Fprint(w, "Error handling Withdraw! Not enough money!")
+		log.Println("Error happened handling Withdraw. Not enough money!")
+		ErrorResponseInJson(w, 418, "Not enough money!")
 		w.WriteHeader(http.StatusConflict)
 		return
 	}
 
 	result, err := db_storage.BalanceChange(DB, id, "-" + amount)
 	if err != nil {
-		log.Println("Error happened handling Balance Payment:", err)
+		log.Println("Error happened handling Withdraw:", err)
+		ErrorResponseInJson(w, 409, "Invalid ID")
 		w.WriteHeader(http.StatusConflict)
 		return
 	}
@@ -74,30 +77,34 @@ func TransferHandler(w http.ResponseWriter, r *http.Request) {
 
 	if result, err := haveEnoughMoney(DB, fromId, amount); !result {
 		if err != nil {
-			log.Println("Error checking money availible in Transfer handler:", err)
-			w.WriteHeader(http.StatusConflict)
+			log.Println("Error happened handling Transfer:", err)
+			ErrorResponseInJson(w, 409, "Invalid ID")
+			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
-		fmt.Fprint(w, "Error handling Withdraw! Not enough money!")
-		w.WriteHeader(http.StatusConflict)
+		log.Println("Error happened handling Transfer. Not enough money!")
+		ErrorResponseInJson(w, 418, "Not enough money!")
+		w.WriteHeader(http.StatusTeapot)
 		return
 	}
-
-	senderBalanceDecrease, err := db_storage.BalanceChange(DB, fromId, "-" + amount)
-	if err != nil {
-		log.Println("Error happened handling Transfer:", err)
-		w.WriteHeader(http.StatusConflict)
-		return
-	}
-	senderRowsAffected, _ := senderBalanceDecrease.RowsAffected()
 
 	receiverBalanceIncrease, err := db_storage.BalanceChange(DB, toId, amount)
 	if err != nil {
 		log.Println("Error happened handling Transfer:", err)
+		ErrorResponseInJson(w, 409, "Invalid ID")
 		w.WriteHeader(http.StatusConflict)
 		return
 	}
 	receiverRowsAffected, _ := receiverBalanceIncrease.RowsAffected()
+
+	senderBalanceDecrease, err := db_storage.BalanceChange(DB, fromId, "-" + amount)
+	if err != nil {
+		log.Println("Error happened handling Transfer:", err)
+		ErrorResponseInJson(w, 409, "Invalid ID")
+		w.WriteHeader(http.StatusConflict)
+		return
+	}
+	senderRowsAffected, _ := senderBalanceDecrease.RowsAffected()
 
 	log.Printf("[DB LOG] Sender Rows affected: %d | Receiver Rows affected: %d\n",
 		senderRowsAffected, receiverRowsAffected)
@@ -140,6 +147,7 @@ func HistoryHandler(w http.ResponseWriter, r *http.Request) {
 	HistoryResponseInJson(w, transactions)
 }
 
+// Проверяет достаточно ли у указанного пользователя денег на счету
 func haveEnoughMoney(db *sql.DB, id, amount string) (bool, error){
 	balance, err := db_storage.GetBalance(db, id, "")
 	if err != nil {

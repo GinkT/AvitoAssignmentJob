@@ -57,3 +57,16 @@ func HistoryResponseInJson(w http.ResponseWriter, transactions []*db_storage.Tra
 		json.NewEncoder(w).Encode(transaction)
 	}
 }
+
+type errorData struct {
+	Status 		int			`json:"status"`
+	Error		string		`json:"error"`
+}
+
+func ErrorResponseInJson(w http.ResponseWriter, status int, error string) {
+	dataToEncode := &errorData{
+		Status:		status,
+		Error: 		error,
+	}
+	json.NewEncoder(w).Encode(dataToEncode)
+}

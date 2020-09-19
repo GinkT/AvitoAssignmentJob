@@ -12,9 +12,9 @@ import (
 	"log"
 )
 
-/* Пополнение баланса. В случае если юзера не было в таблице - создаётся новая запись.
-   Если юзер был - выполняет UPDATE баланса и прибавляет сумму пополнения.
-   Соответственно, если в начале amount стоит минус - убавляет. */
+// Пополнение баланса. В случае если юзера не было в таблице - создаётся новая запись.
+// Если юзер был - выполняет UPDATE баланса и прибавляет сумму пополнения.
+// Соответственно, если в начале amount стоит минус - убавляет.
 func BalanceChange(db *sql.DB, id, amount string) (sql.Result, error) {
 	sqlStatement := `
 			INSERT INTO public."users"
@@ -32,8 +32,8 @@ func BalanceChange(db *sql.DB, id, amount string) (sql.Result, error) {
 	return res, nil
 }
 
-/* Получение баланса. Выполняет запрос к БД и получает значение баланса пользователя.
-   При указанном параметре currency - выполняет конвертацию. */
+// Получение баланса. Выполняет запрос к БД и получает значение баланса пользователя.
+// При указанном параметре currency - выполняет конвертацию.
 func GetBalance(db *sql.DB, id, currency string) (float64, error){
 	var conversionRate float64 = 1
 	if currency != "" {
@@ -98,25 +98,14 @@ func AddTransaction(db *sql.DB, transactionType, sender, receiver, amount string
 			VALUES($1, $2, $3, $4, $5)
 		`
 
-	time := time.Now().Unix()
+	uTime := time.Now().Unix()
 
-	_, err := db.Exec(sqlStatement, transactionType, nullIntCheck(sender), nullIntCheck(receiver), amount, time)
+	_, err := db.Exec(sqlStatement, transactionType, nullIntCheck(sender), nullIntCheck(receiver), amount, uTime)
 	if err != nil {
 		return err
 	}
 	return nil
 }
-
-/*
-	CREATE TABLE transactions (
-    id          SERIAL              PRIMARY KEY,
-    type        text                NOT NULL,
-    sender      integer             NULL,
-    receiver    integer             NULL,
-    amount      double precision    NOT NULL,
-    time        integer             NOT NULL
-);
- */
 
 type Transaction struct {
 	Desc 		string				`json:"description"`
@@ -126,6 +115,8 @@ type Transaction struct {
 	Time 		string				`json:"time"`
 }
 
+// Получение журнала транзакций по ID. Опционально сортировка sortBy по сумме(amount), дате транзакции(time)
+// и изменение порядка сортировки orderBy по возрастанию(asc), убыванию(desc).
 func GetHistoryForId(db *sql.DB, id, sortBy, orderBy string) []*Transaction {
 	sqlStatement := `
 			SELECT type, sender, receiver, amount, time 
