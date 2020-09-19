@@ -24,6 +24,7 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - fullstack
+    restart: always
 
   adminer:
     image: adminer

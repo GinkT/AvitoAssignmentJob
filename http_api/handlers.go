@@ -22,6 +22,9 @@ func PaymentHandler(w http.ResponseWriter, r *http.Request) {
 	rowsAffected, _ := result.RowsAffected()
 	lastInsertId , _ := result.LastInsertId()
 	response := fmt.Sprintf("Request contains id: %s | amount: %s\n[DB LOG] Rows affected: %d, Last Insert ID: %d", id, amount, rowsAffected, lastInsertId)
+
+	db_storage.AddTransaction(DB, "payment", "", id, amount)
+
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprint(w, response)
 }
@@ -53,6 +56,8 @@ func WithdrawHandler(w http.ResponseWriter, r *http.Request) {
 
 	response := fmt.Sprintf("Request contains id: %s | amount: %s\n[DB LOG] Rows affected: %d, Last Insert ID: %d",
 		id, amount, rowsAffected, lastInsertId)
+
+	db_storage.AddTransaction(DB, "withdraw", id, "", amount)
 
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprint(w, response)
@@ -97,6 +102,9 @@ func TransferHandler(w http.ResponseWriter, r *http.Request) {
 		"\n[DB LOG] Sender Rows affected: %d, Sender Last Insert ID: %d" +
 		"\nReceiver Rows affected: %d, Receiver Last Insert ID: %d",
 		fromId, toId, amount, senderRowsAffected, senderLastInsertId, receiverRowsAffected, receiverLastInsertId)
+
+	db_storage.AddTransaction(DB, "transfer", fromId, toId, amount)
+
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprint(w, response)
 }
@@ -115,8 +123,9 @@ func BalanceHandler(w http.ResponseWriter, r *http.Request) {
 	var response string
 	if currency != "" {
 		response = fmt.Sprintf("Request contains id: %s | currency: %s\nBalance in %s: %f", id, currency, currency, balance)
+	} else {
+		response = fmt.Sprintf("Request contains id: %s \nBalance in RUB: %f", id, balance)
 	}
-	response = fmt.Sprintf("Request contains id: %s \nBalance in RUB: %f", id, balance)
 
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprint(w, response)

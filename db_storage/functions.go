@@ -7,6 +7,8 @@ import (
 	_ "github.com/lib/pq"
 	"io/ioutil"
 	"net/http"
+	"strconv"
+	"time"
 
 	"log"
 )
@@ -80,4 +82,34 @@ func GetConversionRate(currency string) (float64, error) {
 	log.Printf("Unmarshalled current rate for %s: %f\n", currency, rate["RUB"])
 
 	return rate["RUB"].(float64), nil
+}
+
+func nullIntCheck(s string) sql.NullInt64 {
+	if len(s) == 0 {
+		return sql.NullInt64{}
+	}
+	sInt, _ := strconv.ParseInt(s, 10, 64)
+	return sql.NullInt64{ Int64: sInt, Valid: true}
+}
+
+func nullIntCheck_I(str string) interface{} {
+	if len(str) == 0 {
+		return sql.NullInt64{}
+	}
+	return str
+}
+
+func AddTransaction(db *sql.DB, transactionType, sender, receiver, amount string) error {
+	sqlStatement := `
+			INSERT INTO public."transactions" (type, sender, receiver, amount, time)
+			VALUES($1, $2, $3, $4, $5)
+		`
+
+	time := time.Now().Unix()
+
+	_, err := db.Exec(sqlStatement, transactionType, nullIntCheck_I(sender), nullIntCheck_I(receiver), amount, time)
+	if err != nil {
+		return err
+	}
+	return nil
 }

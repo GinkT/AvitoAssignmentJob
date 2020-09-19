@@ -4,6 +4,7 @@ import (
 	"github.com/GinkT/AvitoAssignmentJob/db_storage"
 	"github.com/GinkT/AvitoAssignmentJob/http_api"
 	"github.com/GinkT/AvitoAssignmentJob/server"
+
 	"log"
 )
 
@@ -25,6 +26,7 @@ func main () {
 
 	server := server.NewServer(db, router)
 	server.Run()
+	// Научите меня делать graceful shutdown
 }
 
 

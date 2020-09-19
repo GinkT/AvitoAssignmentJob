@@ -4,10 +4,10 @@ CREATE TABLE users (
 );
 
 CREATE TABLE transactions (
-    id          integer             PRIMARY KEY,
+    id          SERIAL              PRIMARY KEY,
     type        text                NOT NULL,
-    from        integer,
-    to          integer,
+    sender      integer             NULL,
+    receiver    integer             NULL,
     amount      double precision    NOT NULL,
-    date        integer             NOT NULL
+    time        integer             NOT NULL
 );

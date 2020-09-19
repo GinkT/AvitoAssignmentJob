@@ -13,9 +13,8 @@
     <list default="true" id="6b320c27-2fed-456a-9a84-17238b54eb2d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_storage/functions.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_storage/functions.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_storage/singleton.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_storage/database.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/http_api/handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/http_api/handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/http_api/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/http_api/router.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/init.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
@@ -141,6 +140,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1072" y="533" key="#Go_Modules/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600412653934" />
+    <state x="1031" y="523" key="#Notifications" timestamp="1600502152641">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1031" y="523" key="#Notifications/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600502152641" />
     <state x="720" y="555" key="#SQL_Resolution_Scopes" timestamp="1600452854635">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -153,26 +156,30 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1049" y="501" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600449686209" />
+    <state x="1063" y="406" key="#com.intellij.ide.util.MemberChooser" timestamp="1600502831269">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1063" y="406" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600502831269" />
     <state x="1060" y="454" key="FileChooserDialogImpl" timestamp="1600422971967">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1060" y="454" key="FileChooserDialogImpl/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600422971967" />
-    <state width="1258" height="401" key="GridCell.Tab.0.bottom" timestamp="1600452837872">
+    <state width="1258" height="401" key="GridCell.Tab.0.bottom" timestamp="1600503055886">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="401" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600452837872" />
-    <state width="1258" height="401" key="GridCell.Tab.0.center" timestamp="1600452837871">
+    <state width="1258" height="401" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600503055886" />
+    <state width="1258" height="401" key="GridCell.Tab.0.center" timestamp="1600503055886">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="401" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600452837871" />
-    <state width="1258" height="401" key="GridCell.Tab.0.left" timestamp="1600452837871">
+    <state width="1258" height="401" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600503055886" />
+    <state width="1258" height="401" key="GridCell.Tab.0.left" timestamp="1600503055886">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="401" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600452837871" />
-    <state width="1258" height="401" key="GridCell.Tab.0.right" timestamp="1600452837872">
+    <state width="1258" height="401" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600503055886" />
+    <state width="1258" height="401" key="GridCell.Tab.0.right" timestamp="1600503055886">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="401" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600452837872" />
+    <state width="1258" height="401" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600503055886" />
     <state width="1258" height="359" key="GridCell.Tab.1.bottom" timestamp="1600422673320">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -207,7 +214,7 @@
       <breakpoints>
         <line-breakpoint type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/main.go</url>
-          <line>18</line>
+          <line>19</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
