@@ -11,11 +11,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b320c27-2fed-456a-9a84-17238b54eb2d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/db_storage/functions_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/http_api/handlers_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_storage/functions.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_storage/functions.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/http_api/handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/http_api/handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/http_api/json_encoders.go" beforeDir="false" afterPath="$PROJECT_DIR$/http_api/json_encoders.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +62,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
-  <component name="RunManager" selected="Go Build.go build github.com/GinkT/AvitoAssignmentJob">
+  <component name="RunManager" selected="Go Test.TestGetBalance in github.com/GinkT/AvitoAssignmentJob/db_storage">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="AvitoAssignment[Job]" />
       <working_directory value="$PROJECT_DIR$" />
@@ -91,6 +92,17 @@
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
+    <configuration name="TestGetBalance in github.com/GinkT/AvitoAssignmentJob/db_storage" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="AvitoAssignment[Job]" />
+      <working_directory value="$PROJECT_DIR$/db_storage" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="github.com/GinkT/AvitoAssignmentJob/db_storage" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <pattern value="^\QTestGetBalance\E$" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
       <module name="AvitoAssignment[Job]" />
       <working_directory value="$PROJECT_DIR$" />
@@ -105,9 +117,11 @@
     <list>
       <item itemvalue="Go Build.go build AvitoAssignmentJob" />
       <item itemvalue="Go Build.go build github.com/GinkT/AvitoAssignmentJob" />
+      <item itemvalue="Go Test.TestGetBalance in github.com/GinkT/AvitoAssignmentJob/db_storage" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.TestGetBalance in github.com/GinkT/AvitoAssignmentJob/db_storage" />
         <item itemvalue="Go Build.go build github.com/GinkT/AvitoAssignmentJob" />
       </list>
     </recent_temporary>
@@ -167,38 +181,38 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1060" y="454" key="FileChooserDialogImpl/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600422971967" />
-    <state width="1258" height="401" key="GridCell.Tab.0.bottom" timestamp="1600520427789">
+    <state width="1258" height="359" key="GridCell.Tab.0.bottom" timestamp="1600557739852">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="401" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600520427789" />
-    <state width="1258" height="401" key="GridCell.Tab.0.center" timestamp="1600520427789">
+    <state width="1258" height="359" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600557739852" />
+    <state width="1258" height="359" key="GridCell.Tab.0.center" timestamp="1600557739852">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="401" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600520427789" />
-    <state width="1258" height="401" key="GridCell.Tab.0.left" timestamp="1600520427789">
+    <state width="1258" height="359" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600557739852" />
+    <state width="1258" height="359" key="GridCell.Tab.0.left" timestamp="1600557739852">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="401" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600520427789" />
-    <state width="1258" height="401" key="GridCell.Tab.0.right" timestamp="1600520427789">
+    <state width="1258" height="359" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600557739852" />
+    <state width="1258" height="359" key="GridCell.Tab.0.right" timestamp="1600557739852">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="401" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600520427789" />
-    <state width="1258" height="359" key="GridCell.Tab.1.bottom" timestamp="1600422673320">
+    <state width="1258" height="359" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600557739852" />
+    <state width="1258" height="359" key="GridCell.Tab.1.bottom" timestamp="1600557739853">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="359" key="GridCell.Tab.1.bottom/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600422673320" />
-    <state width="1258" height="359" key="GridCell.Tab.1.center" timestamp="1600422673320">
+    <state width="1258" height="359" key="GridCell.Tab.1.bottom/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600557739853" />
+    <state width="1258" height="359" key="GridCell.Tab.1.center" timestamp="1600557739853">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="359" key="GridCell.Tab.1.center/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600422673320" />
-    <state width="1258" height="359" key="GridCell.Tab.1.left" timestamp="1600422673320">
+    <state width="1258" height="359" key="GridCell.Tab.1.center/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600557739853" />
+    <state width="1258" height="359" key="GridCell.Tab.1.left" timestamp="1600557739852">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="359" key="GridCell.Tab.1.left/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600422673320" />
-    <state width="1258" height="359" key="GridCell.Tab.1.right" timestamp="1600422673320">
+    <state width="1258" height="359" key="GridCell.Tab.1.left/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600557739852" />
+    <state width="1258" height="359" key="GridCell.Tab.1.right" timestamp="1600557739853">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="359" key="GridCell.Tab.1.right/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600422673320" />
+    <state width="1258" height="359" key="GridCell.Tab.1.right/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600557739853" />
     <state width="200" height="441" key="SqlResolveConfigurable" timestamp="1600528942769">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -207,10 +221,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="832" y="429" width="896" height="528" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600415440234" />
-    <state x="986" y="433" width="587" height="534" key="find.popup" timestamp="1600519051779">
+    <state x="986" y="433" width="587" height="534" key="find.popup" timestamp="1600556340856">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="986" y="433" width="587" height="534" key="find.popup/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600519051779" />
+    <state x="986" y="433" width="587" height="534" key="find.popup/0.0.2560.1400/-1920.0.1920.1040@0.0.2560.1400" timestamp="1600556340856" />
     <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1600453166053">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -223,6 +237,21 @@
           <url>file://$PROJECT_DIR$/main.go</url>
           <line>19</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/db_storage/functions_test.go</url>
+          <line>18</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/db_storage/functions.go</url>
+          <line>86</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/db_storage/functions_test.go</url>
+          <line>99</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

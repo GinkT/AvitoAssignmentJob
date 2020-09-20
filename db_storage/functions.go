@@ -84,7 +84,7 @@ func GetConversionRate(currency string) (float64, error) {
 }
 
 // Проверка на Null, возвращает NullInt или пустой интерфейс
-func nullIntCheck(str string) interface{} {
+func NullIntCheck(str string) interface{} {
 	if len(str) == 0 {
 		return sql.NullInt64{}
 	}
@@ -100,7 +100,7 @@ func AddTransaction(db *sql.DB, transactionType, sender, receiver, amount string
 
 	uTime := time.Now().Unix()
 
-	_, err := db.Exec(sqlStatement, transactionType, nullIntCheck(sender), nullIntCheck(receiver), amount, uTime)
+	_, err := db.Exec(sqlStatement, transactionType, NullIntCheck(sender), NullIntCheck(receiver), amount, uTime)
 	if err != nil {
 		return err
 	}
